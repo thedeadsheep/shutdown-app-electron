@@ -9,7 +9,6 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 })
 window.API = {
-
     dateConvert: (dS) => {
         if (dS == null) {
             return ""
