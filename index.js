@@ -1,5 +1,6 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 const path = require('node:path')
+const { checkSchedule } = require('./process')
 
 const createWindow = () => {
     const win = new BrowserWindow({
@@ -13,7 +14,12 @@ const createWindow = () => {
     })
     win.webContents.openDevTools()
     win.loadFile('index.html')
+    ipcMain.on('check-child-process', (event, value) => {
+        console.log("child-process running", value)
+        checkSchedule()
+    })
 }
+
 app.whenReady().then(() => {
     createWindow()
 

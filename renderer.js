@@ -5,6 +5,10 @@ let secNum = document.getElementById('sec-input')
 let testText = document.getElementById('test-text')
 
 timeCheck()
+document.getElementById('cancel-btn')
+    .addEventListener('click', () => {
+        window.API.childProcess()
+    })
 document.getElementById('check-btn')
     .addEventListener('click', () => {
         let value = parseInt(hourNum.value) * 3600 + parseInt(minNum.value) * 60 + parseInt(secNum.value) * 1000
