@@ -3,12 +3,17 @@ let hourNum = document.getElementById('hour-input')
 let minNum = document.getElementById('min-input')
 let secNum = document.getElementById('sec-input')
 let testText = document.getElementById('test-text')
-
+let shutdownBtn = document.getElementById('shutdown-btn')
+let cancelShutdownBtn = document.getElementById('cancel-btn')
 timeCheck()
-document.getElementById('cancel-btn')
-    .addEventListener('click', () => {
-        window.API.childProcess()
-    })
+shutdownBtn.addEventListener('click', () => {
+    let timeSpan = parseInt(hourNum.value) * 3600 + parseInt(minNum.value) * 60 + parseInt(secNum.value)
+    window.API.shutdownCMD('shutdown', `-t ${timeSpan}`)
+})
+cancelShutdownBtn.addEventListener('click', () => {
+    window.API.shutdownCMD('stopShutdown', ``)
+})
+
 document.getElementById('check-btn')
     .addEventListener('click', () => {
         let value = parseInt(hourNum.value) * 3600 + parseInt(minNum.value) * 60 + parseInt(secNum.value) * 1000

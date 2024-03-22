@@ -1,5 +1,10 @@
 const { ipcRenderer } = require("electron");
 
+
+window.addEventListener('DOMContentLoaded', () => {
+
+    /* ipcRenderer.send('check-shutdown-schedule', 'ping') */
+})
 window.API = {
     dateConvert: (dS) => {
         if (dS == null) {
@@ -15,7 +20,19 @@ window.API = {
             ("0" + m.getSeconds()).slice(-2);
         return dateString
     },
-    childProcess: (value) => {
-        ipcRenderer.send('check-child-process', "a")
+    shutdownCMD: (cmd, atb) => {
+        let command
+        if (cmd === 'shutdown') {
+            command = '-s '
+        }
+        if (cmd === 'stopShutdown') {
+            command = '-a '
+        }
+        command += atb
+        ipcRenderer.on('shutdown-cmd-reply', (_event, arg) => {
+            console.log(arg)
+        })
+        ipcRenderer.send('shutdown-cmd-running', command)
     }
+
 }
