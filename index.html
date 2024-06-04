@@ -1,49 +1,83 @@
-<!DOCTYPE html>
-<html>
-
 <head>
-    <meta charset="UTF-8">
-    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>Hello World!</title>
+   
+    <style>
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+            overflow: hidden;
+            margin: 10px;
+        }
+        .func-btn{
+            display: flex;
+            flex-direction: row-reverse;
+        }
+        select, div{
+            width: 100%;
+        }
+        input{
+            margin: 5px 4px;
+        }
+        input[type=number]{
+            width: 100%;
+        }
 
+        .time-input{
+            display: flex;
+            overflow: auto;
+            height: auto;
+            flex-wrap: nowrap;
+            flex-direction: row;
+            margin: 5px 0px;
+            border: 0.5px solid black;
+        }
+        .hide-time{
+            overflow: hidden !important;
+            height: 0;
+            border: none;
+        }
+    </style>
 </head>
-
 <body>
-    <h1>Shutdown app</h1>
     <div>
+        <h1>Window Shutdown App</h1>
+
+        <select>
+            <option value="0" selected>Shutdown</option>
+            <option value="1">Restart</option>
+            <option value="2">Hibernate</option>
+            <option value="3">Log Out</option>
+        </select>
         <div>
-            <h2 id="time-display">
-
-            </h2>
-            <p>
-                Add Record
-            </p>
-            <div>
-                <input type="number" id="hour-input" class="" min="0" max="23" value="0" />
-                <input type="number" id="min-input" class="" min="0" max="59" value="0" />
-                <input type="number" id="sec-input" class="" min="0" max="59" value="0" />
-                <p id="test-text">
-
-                </p>
-                <button id="check-btn">
-                    Check
-                </button>
-                <button id="shutdown-btn">
-                    Shutdown
-                </button>
-                <button id="hibernate-btn">
-                    Hibernate
-                </button>
-                <button id="cancel-btn">
-                    Cancel
-                </button>
+            <label>
+                Execute Later
+                <input type="checkbox" id="after-time" uncheck>
+            </label>
+            <div class="clock">
+                <div id="time-input" class="hide-time time-input">
+                    <h3>
+                        After
+                    </h3>
+                    <input type="number">
+                    <input type="number">
+                    <input type="number">
+                    
+                </div>
             </div>
         </div>
-
-
     </div>
-    <script src="./renderer.js"></script>
-</body>
+    
+   <div class="func-btn">
+    <div style="width: auto;">
+        <button id="OK">OK</button>
+        <button id="Cancel">Cancel</button>
+        <button id="help">Help</button>
+    </div>
+   </div>
+   <div></div>
+   
 
-</html>
+    <script src="renderer.js" type="text/javascript"></script>
+</body>

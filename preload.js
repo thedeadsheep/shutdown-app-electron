@@ -11,7 +11,6 @@ window.API = {
             return ""
         }
         let m = new Date(dS)
-
         let dateString = ("0" + (m.getMonth() + 1)).slice(-2) + " " +
             ("0" + m.getDate()).slice(-2) + ", " +
             m.getFullYear() + " - " +
@@ -20,19 +19,17 @@ window.API = {
             ("0" + m.getSeconds()).slice(-2);
         return dateString
     },
-    shutdownCMD: (cmd, atb) => {
-        let command
-        if (cmd === 'shutdown') {
-            command = '-s '
+    message: (strContent, title)=>{
+        let messageContent = {
+            content: strContent,
+            title: title
         }
-        if (cmd === 'stopShutdown') {
-            command = '-a '
-        }
-        command += atb
-        ipcRenderer.on('shutdown-cmd-reply', (_event, arg) => {
-            console.log(arg)
-        })
-        ipcRenderer.send('shutdown-cmd-running', command)
-    }
+        ipcRenderer.send('message-listening', messageContent)
+    },
+    closeApp: ()=>{
+        ipcRenderer.send('close-app')
+    },
+    sendCommand: (time, command)=>{
 
+    }
 }
